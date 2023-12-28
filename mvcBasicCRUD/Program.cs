@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using mvcBasicCRUD.Data;
+
 namespace mvcBasicCRUD
 {
     public class Program
@@ -5,6 +8,13 @@ namespace mvcBasicCRUD
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<ProjectDBContext>(
+               options =>
+               options
+               .UseLazyLoadingProxies()
+               .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
