@@ -1,31 +1,25 @@
-# Int-Java-2022-Assignment4
+# MVC CRUD Application with Entity Framework in C#
 
-This assignment is meant to be short and sweet.     
 
-If you understand the basics of polymorphism, interfaces and Generic Lists you should have no trouble at all with it.   
+This repository contains a simple CRUD (Create, Read, Update, Delete) application implemented in C# using the Entity Framework and following the MVC (Model-View-Controller) architecture.
 
- 
+<h3>Overview</h3>
+<p>This project aims to demonstrate the fundamental operations of a CRUD application in a C# environment with the added structure of MVC. It utilizes Entity Framework, a popular Object-Relational Mapping (ORM) framework, to interact with a relational database.<p>
 
-- Use the data that is generated from the “**generateDepartments()**” method and the “**generateEmployees()**” method to load those values into your “entities” List   
-- Implement the “**Display**” method so it can display all the values from ***either*** an **Employee** or a **Department**.   
-- In the generate methods, ***change the sample data***, so it has different first and last names, and different department names, so your names are unique, and your departments are different than the starter.     
-- Don’t worry about where the values for the Id’s come from, that’s already taken care of for you in the starter, just ***make sure they are displayed in the output using their get methods.***
+<h3>Features</h3>
+<p><strong>Create:</strong> Add new records to the database.<br>
+<strong>Read:</strong> Retrieve and display existing records from the database.<br>
+<strong>Update:</strong> Modify existing records in the database.<br>
+<strong>Delete:</strong> Remove records from the database.</p>
 
- 
+<h3>Technologies Used</h3>
+<p><strong>C#:</strong> The primary programming language.<br>
+<strong>Entity Framework:</strong> An ORM framework for simplifying database operations.<br>
+<strong>ASP.NET MVC:</strong> A web application framework for building scalable and maintainable web applications.<br></p>
 
-#### Everything is hardcoded and you don’t need to use a scanner object.
+<h3>MVC Structure</h3>
+<p>The application follows the MVC architecture: <br>
 
-The sample output should look similar to this:   
-
-Id: 1   
-Department Name IT   
-Id: 2   
-Department Name Engineering   
-Id: 3   
-First Name Andre   
-Last Name Boudreau   
-
-Id: 4   
-First Name Delon   
-Last Name Van de Venter   
-
+<strong>Model:</strong> Describes the structure of the data and business logic.<br>
+<strong>View:</strong> Displays the user interface and receives user input.<br>
+<strong>Controller:</strong> Handles user input, updates the model, and manipulates the view.<br><p>
