@@ -19,6 +19,8 @@ namespace mvcBasicCRUD.Models
         [Display(Name = "Completed")]
         public bool IsCompleted { get; set; }
 
+        [Required]
+        [Display(Name = "Type")]
         public virtual int? ChoreTypeID { get; set; }
         public virtual ChoreType? ChoreType { get; set; }
 
@@ -33,6 +35,6 @@ namespace mvcBasicCRUD.Models
         [StringLength(100)]
         public string? Name { get; set; }
 
-        public virtual ICollection<Task>? Chores { get; set; }
+        public virtual ICollection<Chore>? Chores { get; set; }
     }
 }
