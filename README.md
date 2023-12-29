@@ -23,3 +23,6 @@ This repository contains a simple CRUD (Create, Read, Update, Delete) applicatio
 <strong>Model:</strong> Describes the structure of the data and business logic.<br>
 <strong>View:</strong> Displays the user interface and receives user input.<br>
 <strong>Controller:</strong> Handles user input, updates the model, and manipulates the view.<br><p>
+
+<h3>About project</h3>
+<p>The ChoreTracker project is a chore management web app where users can register tasks, track due dates, and designate chore types. The system validates dates, chore categories, and chore type creation.<p>
