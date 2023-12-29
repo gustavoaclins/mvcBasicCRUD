@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>ChoreType</h4>
+    <h4>Chore Type</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -17,6 +17,49 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
+
+    @if (ViewData["Choures"] == null)
+    {
+        <p>No chores with this type</p>
+    }
+    else
+    {
+        <h4>Chores for @Model.Name</h4>
+        <hr />
+        <table class="table">
+        <tr>
+            <th>
+                Chore
+            </th>
+            <th>
+                Due Date
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Status
+            </th>
+        </tr>
+    @foreach (var item in (List<ChoresViewModels>)ViewData["Choures"]!)
+    {
+        <tr>
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @item.DueDate.Date.ToShortDateString()
+            </td>
+            <td>
+                @item.ChoreType
+            </td>
+            <td>
+                @item.Status
+            </td>
+            </tr>
+        }
+    </table>
+    }
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.ChoreTypeID">Edit</a> |

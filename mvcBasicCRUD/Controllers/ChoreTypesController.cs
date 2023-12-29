@@ -42,6 +42,26 @@ namespace mvcBasicCRUD.Controllers
                 return NotFound();
             }
 
+            List<Chore> chores = _context.Chores!.Where(c => c.ChoreTypeID == id).ToList();
+
+            List<ChoresViewModels> choresView = new List<ChoresViewModels>();
+
+            foreach (Chore c in chores)
+            {
+                ChoresViewModels choreDetails = new ChoresViewModels
+                {
+                    Id = c.ChoreID,
+                    Title = c.Title,
+                    DueDate = c.DueDate,
+                    ChoreType = c.ChoreType!.Name,
+                    Status = ChoreStatus(c.IsCompleted, c.DueDate)
+                };
+
+                choresView.Add(choreDetails);
+            }
+
+            ViewData["Choures"] = choresView;
+
             return View(choreType);
         }
 
@@ -176,6 +196,22 @@ namespace mvcBasicCRUD.Controllers
         private bool ChoreTypeExists(int id)
         {
           return (_context.ChoreTypes?.Any(e => e.ChoreTypeID == id)).GetValueOrDefault();
+        }
+
+        private string ChoreStatus(bool completed, DateTime due)
+        {
+            if (completed)
+            {
+                return "Completed";
+            }
+            else if (!completed && due.Date <= DateTime.Now.Date)
+            {
+                return "Overdue";
+            }
+            else
+            {
+                return "To Do";
+            }
         }
     }
 }
