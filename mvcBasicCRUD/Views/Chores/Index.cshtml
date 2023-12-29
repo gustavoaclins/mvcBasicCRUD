@@ -1,10 +1,10 @@
-﻿@model IEnumerable<mvcBasicCRUD.Models.Chore>
+﻿@model IEnumerable<mvcBasicCRUD.Models.ChoresViewModels>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Chores";
 }
 
-<h1>Index</h1>
+<h1>Chores</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,16 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                Chore
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DueDate)
+                Due Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsCompleted)
+                Type
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ChoreType)
+                Status
             </th>
             <th></th>
         </tr>
@@ -31,21 +31,21 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @item.Title
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DueDate)
+                @item.DueDate.Date.ToShortDateString()
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsCompleted)
+                @item.ChoreType
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ChoreType.Name)
+                @item.Status
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ChoreID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ChoreID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ChoreID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

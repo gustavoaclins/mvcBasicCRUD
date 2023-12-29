@@ -58,8 +58,18 @@ namespace mvcBasicCRUD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ChoreTypeID,Name")] ChoreType choreType)
         {
+
             if (ModelState.IsValid)
             {
+
+                var choreTypeWithName = _context.ChoreTypes!.Where(ctp => ctp.Name == choreType.Name);
+
+                if (choreTypeWithName.Any())
+                {
+                    ModelState.AddModelError("", $"The is a Chore Type with name: {choreType.Name}");
+                    return View(choreType);
+                }
+
                 _context.Add(choreType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -97,6 +107,14 @@ namespace mvcBasicCRUD.Controllers
 
             if (ModelState.IsValid)
             {
+                var choreTypeWithName = _context.ChoreTypes!.Where(ctp => ctp.Name == choreType.Name);
+
+                if (choreTypeWithName.Any())
+                {
+                    ModelState.AddModelError("", $"The is a Chore Type with name: {choreType.Name}");
+                    return View(choreType);
+                }
+
                 try
                 {
                     _context.Update(choreType);

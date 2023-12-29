@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using mvcBasicCRUD.Data;
 using mvcBasicCRUD.Models;
+using NuGet.Common;
 
 namespace mvcBasicCRUD.Controllers
 {
@@ -22,8 +23,26 @@ namespace mvcBasicCRUD.Controllers
         // GET: Chores
         public async Task<IActionResult> Index()
         {
-            var projectDBContext = _context.Chores.Include(c => c.ChoreType);
-            return View(await projectDBContext.ToListAsync());
+            List<Chore> chores = _context.Chores!.ToList();
+
+            List<ChoresViewModels> choresView = new List<ChoresViewModels>();
+
+            foreach (Chore c in chores)
+            {
+                ChoresViewModels choreDetails = new ChoresViewModels
+                {
+                    Id = c.ChoreID,
+                    Title = c.Title,
+                    DueDate = c.DueDate,
+                    ChoreType = c.ChoreType!.Name,
+                    Status = ChoreStatus(c.IsCompleted, c.DueDate)
+                };
+
+                choresView.Add(choreDetails);
+            }
+
+
+            return View(choresView);
         }
 
         // GET: Chores/Details/5
@@ -163,6 +182,22 @@ namespace mvcBasicCRUD.Controllers
         private bool ChoreExists(int id)
         {
           return (_context.Chores?.Any(e => e.ChoreID == id)).GetValueOrDefault();
+        }
+
+        private string ChoreStatus(bool completed, DateTime due)
+        {
+            if (completed)
+            {
+                return "Completed";
+            }
+            else if (!completed && due.Date <=  DateTime.Now.Date)
+            {
+                return "Overdue";
+            }
+            else
+            {
+                return "To Do";
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ namespace mvcBasicCRUD.Models
         [Key]
         public int ChoreID { get; set; }
         [Required]
-        [StringLength(100)]
+        [StringLength(50)]
         public string? Title { get; set; }
 
         [Required]
@@ -32,7 +32,7 @@ namespace mvcBasicCRUD.Models
         public int ChoreTypeID { get; set; }
 
         [Required]
-        [StringLength(100)]
+        [StringLength(50)]
         public string? Name { get; set; }
 
         public virtual ICollection<Chore>? Chores { get; set; }

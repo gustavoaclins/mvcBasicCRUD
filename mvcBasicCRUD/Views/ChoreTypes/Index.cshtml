@@ -15,6 +15,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
+            <th>
+                Choures Count
+            </th>
+            <th>
+                Choures Overdue
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -23,6 +29,12 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @item.Chores!.Count
+            </td>
+            <td>
+                @item.Chores!.Where(c => c.DueDate >= DateTime.Now.Date).Count()
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ChoreTypeID">Edit</a> |
