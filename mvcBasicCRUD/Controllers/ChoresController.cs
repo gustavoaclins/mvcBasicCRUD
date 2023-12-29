@@ -78,6 +78,15 @@ namespace mvcBasicCRUD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ChoreID,Title,DueDate,IsCompleted,ChoreTypeID")] Chore chore)
         {
+            var choreOverlap = _context.Chores!.Where(c => c.Title == chore.Title && c.DueDate.Date == chore.DueDate.Date);
+
+            if (choreOverlap.Any())
+            {
+                ModelState.AddModelError("", $"There is already a Chore with the name due on this date.");
+                ViewData["ChoreTypeID"] = new SelectList(_context.ChoreTypes, "ChoreTypeID", "Name", chore.ChoreTypeID);
+                return View(chore);
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(chore);
@@ -119,6 +128,15 @@ namespace mvcBasicCRUD.Controllers
 
             if (ModelState.IsValid)
             {
+                var choreOverlap = _context.Chores!.Where(c => c.Title == chore.Title && c.DueDate.Date == chore.DueDate.Date && c.ChoreID != chore.ChoreID);
+
+                if (choreOverlap.Any())
+                {
+                    ModelState.AddModelError("", $"There is already a Chore with the name due on this date.");
+                    ViewData["ChoreTypeID"] = new SelectList(_context.ChoreTypes, "ChoreTypeID", "Name", chore.ChoreTypeID);
+                    return View(chore);
+                }
+
                 try
                 {
                     _context.Update(chore);
